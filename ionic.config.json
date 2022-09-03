@@ -1,0 +1,7 @@
+{
+  "name": "appFirst",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
