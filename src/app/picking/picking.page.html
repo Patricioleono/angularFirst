@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Picking</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label position="stacked">Agregar Lotes</ion-label>
+    <ion-textarea inputmode="text" [(ngModel)]="busquedaFolios">
+
+    </ion-textarea>
+    <ion-button expand="full" type="submit" (click)="bFolios(busquedaFolios)">Validar Folios</ion-button>
+  </ion-item>
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th> Lote</th>
+        <th> Material</th>
+        <th> Almacen</th>
+        <th> Cant. SAP</th>
+        <th> Cant. Venta</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of itemFolio">
+        <td>{{item.CHARG}}</td>
+        <td>{{item.MATNR}}</td>
+        <td>{{item.LGORT}}</td>
+        <td>{{item.CLABS}} {{item.MEINS}}</td>
+        <td>
+          {{item.CLABS}}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <ion-item>
+    <ion-button expand="full" type="submit" (click)="enviarDatos(true)">Finalizar Despacho</ion-button>
+  </ion-item>
+
+  <!--modal content final request -->
+  <ion-modal [isOpen]="openModal">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Despacho Ingresado Exitosamente</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Detalle</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-list *ngFor ="let fRes of fRequest, let i = index">
+              {{fRes[i].MESSAGE}}
+            </ion-list>
+          </ion-card-content>
+          <ion-item>
+            <ion-button expand="full" type="submit" (click)="closeModal(false)">Volver</ion-button>
+          </ion-item>
+        </ion-card>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content>

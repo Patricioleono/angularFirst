@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Despacho</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form >
+    <ion-list lines="full" class="ion-no-margin">
+      <ion-item>
+        <ion-label position="floating">Pedido</ion-label>
+        <ion-input type="text" placeholder="Ingrese Pedido" name="pedido" [(ngModel)]="itemBusqueda"></ion-input>
+        <ion-button expand="full" type="submit" (click)="buscarPedido(itemBusqueda)">Buscar Pedido</ion-button>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Cliente</ion-label>
+        <ion-input type="text"  name="cliente" *ngFor="let data of datosForm" value="{{ data.CLIENTE }}"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Destinatario</ion-label>
+        <ion-input type="text" name="destinatario" placeholder="" *ngFor="let data of datosForm" value="{{ data.DESTINATARIO }}"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Tipo de Venta</ion-label>
+        <ion-input type="text" name="tipodeventa" *ngFor="let data of datosForm" value="{{ data.DESTINO }}">  </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Fecha</ion-label>
+        <ion-input type="text" name="fecha" *ngFor="let data of datosForm" value="{{ data.VDATU }}">  </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Patente</ion-label>
+        <ion-input type="text" placeholder="Ingrese Patente" name="patente" [(ngModel)]="patente"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Tractor/Rampla</ion-label>
+        <ion-input type="text" placeholder="Ingrese Tractor/Rampla" name="tractorrampla" [(ngModel)]="rampla"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Rut Chofer</ion-label>
+        <ion-input type="text" placeholder="Ingrese Rut Chofer" name="rutchofer" [(ngModel)]="rChofer"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Nombre Chofer</ion-label>
+        <ion-input type="text" placeholder="Ingrese Nombre Chofer" name="nombrechofer" [(ngModel)]="nChofer"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Comentario</ion-label>
+        <ion-input type="text" placeholder="Ingrese Comentario" name="comentario" [(ngModel)]="comentario"></ion-input>
+      </ion-item>
+    </ion-list>
+    <ion-button expand="full" type="submit" (click)="localManual(patente, rampla, rChofer, nChofer, comentario)">Siguiente</ion-button>
+  </form>
+</ion-content>
