@@ -43,6 +43,7 @@ export class PickingPage implements OnInit {
         let data = this.dataFolios[0].ZMOV_10002.TABLES.STOCKLOTES.item;
         this.itemFolio = data;
         loading.dismiss();
+        console.log(vFolios);
         console.log(data);
       });
     } else {
@@ -64,7 +65,7 @@ export class PickingPage implements OnInit {
           "OPTION": "EQ",
           "LOW": newData[i], //input busqueda
           "HIGH": ""
-        }
+        },
       
       allData.push(arrayQuery);
     }
@@ -76,7 +77,7 @@ export class PickingPage implements OnInit {
       'Authorization', localStorage.getItem('token')
     );
     let cBody = this.construccionBody(data);
-    //console.log(cBody);
+    console.log(cBody);
     const body = {
         "INPUT": {
           "IV_SPRAS": "S",
@@ -98,7 +99,7 @@ export class PickingPage implements OnInit {
               "STLOC_HIGH": ""
             }
           ],
-          "IR_CHARG": 
+          "IR_CHARG":
             cBody,
         },
         "RFC": "ZMOV_10002"
@@ -107,6 +108,7 @@ export class PickingPage implements OnInit {
     return this.http.post<any>(this.urlRfc, body, {
       headers: headers
     }).pipe(map((folios: any = []) => {
+      console.log(folios);
       return folios;
     }));
   }
@@ -115,9 +117,9 @@ export class PickingPage implements OnInit {
 
    this.finalRequest().subscribe( fiRequest => {
     let pData = Object.values(fiRequest);
-    //let fData = pData[0].ZSD_10011.TABLES.GT_RETURN.item;
-   // this.fRequest = fData;
-    console.log(fiRequest);
+    let fData = pData[0];
+    this.fRequest = fData;
+    console.log(this.fRequest);
    });
       
   }

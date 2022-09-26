@@ -25,12 +25,12 @@ export class HomePage implements OnInit {
   ngOnInit() {
     this.user = localStorage.getItem('user');
     this.callSp = localStorage.getItem('callSp');
-    console.log(this.callSp);
+   //console.log(this.callSp);
     this.setOpenModal(true);
+    
     this.getCenters().subscribe( (res:any = []) => {
       //console.log(res);
       this.centros = res.data;
-    
     });
    
   }

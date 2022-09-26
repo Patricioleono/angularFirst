@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { LoadingController } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -19,32 +20,44 @@ export class LoginPage implements OnInit {
   constructor(
      private route: Router,
      private http: HttpClient,
-     public loadCtrl: LoadingController
+     public loadCtrl: LoadingController,
+     public loadAlert: AlertController
 
      ) { }
 
   ngOnInit() {
-   // this.isLoggedIn = false;
       localStorage.setItem('callRfcUrl', 'http://qas-tomcat8.expled.cl:8082/baika-movilidad/call-rfc');
       localStorage.setItem('jwtLoginUrl', 'http://qas-tomcat8.expled.cl:8082/baika-movilidad/jwt-login');
       localStorage.setItem('callSp', 'http://qas-tomcat8.expled.cl:8082/baika-movilidad/call-sp');
   }
   async logIn(user, pass){
+    const alert = await this.loadAlert.create({
+      header: 'Error al Iniciar Session',
+      message: 'Verificar Credenciales',
+      buttons: ['Volver']
+    });
     const loading = await this.loadCtrl.create({
       message: 'Cargando Datos Espere..'
     });
     loading.present();
      this.crearToken(user, pass).subscribe( res => {
-      //console.log(res.token);
-    
-      //procesar token
+      //console.log(res.perfil);
+      let vPerfil = res.perfil;
+      if(Object.keys(vPerfil).length === 0){
+        //message error alert
+        alert.present();
+        this.route.navigate(['login']);
+      }else{
+         //procesar token
       localStorage.setItem('user', user);
       localStorage.setItem('token', res.token);
+      this.route.navigate(['home']);
       //let token = localStorage.getItem('token');
-      
+      }
+     
     });
     loading.dismiss();
-    this.route.navigate(['home']);
+    
     
   }
   public crearToken(user, pass){   
